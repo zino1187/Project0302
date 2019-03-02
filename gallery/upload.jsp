@@ -2,6 +2,14 @@
 <%@ page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page import="java.io.IOException"%>
 <%@ page import="java.io.File"%>
+<%@ page import="java.util.ArrayList"%>
+<%!
+	//컬렉션 프레임웍이 제공하는 라이러리중 순서가 있는 객체집합
+	//표현한 List 를 이용해본다!!! 순서가 있으므로, 배열과 동일
+	//크기가 동적으로 늘어날 수 있다!!(고무줄 처럼) 
+	//오직 객체만 담을수 있다..
+	ArrayList list=new ArrayList();
+%>
 <%
 	//클라이언트가 전송한 문자파라미터값과 바이너리 파일 데이터를
 	//받아서, 서버의 지정한 디렉토리에 저장한다!!
@@ -93,7 +101,16 @@
 	}else{
 		out.print("변경 실패");
 	}
-	
+	//영구 데이터 저장소는 아니지만, 브라우저를 꺼버릴때까지는 사용할 수 있는
+	//객체인 session 에 겔러리 정보를 담아보자!!
+	list.add(time+"."+ext);
+	out.print("현재까지 담겨진 list 의 아이템 수는 "+list.size());
+
+	session.setAttribute("list", list);
+
+	//리스트 페이지에서 최종 결과를 출력해보자!!!
+	//클라이언트의 브라우저로 하여금 지정한 url로 다시 접속을 유도한다
+	response.sendRedirect("/gallery/list.jsp");
 %>
 
 
