@@ -12,6 +12,13 @@
 			<td>No</td>
 			<td>사진</td>
 		</tr>
+
+		<%for(int i=0;i<5;i++){%>
+		<tr>	
+			<td>No</td>
+			<td>사진</td>
+		</tr>
+		<%}%>
 	</table>
 </body>
 </html>
